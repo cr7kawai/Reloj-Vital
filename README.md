@@ -15,14 +15,17 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 - **SmartWatch**: Dispositivo wearable que permite el monitoreo en tiempo real de la frecuencia cardíaca, actividad física y sueño.
 
 ## Historias de Usuario
-1. Como usuario, quiero monitorear mi frecuencia cardíaca en tiempo real para estar al tanto de mi salud cardíaca.
-2. Como usuario, quiero recibir alertas cuando mi ritmo cardíaco esté fuera de los rangos normales (muy alto o muy bajo) para poder actuar de inmediato.
-3. Como usuario, quiero registrar mi actividad física diaria para poder seguir mi progreso y establecer metas.
-4. Como usuario, quiero recibir notificaciones para recordarme moverme después de estar sentado por mucho tiempo y para recordarme cuándo ir a dormir, ayudándome a mantener hábitos saludables.
-5. Como usuario, quiero recibir recomendaciones personalizadas basadas en mis patrones de salud y actividad para mejorar mi bienestar general.
-6. Como usuario, quiero monitorear mi sueño para entender mejor mis patrones de descanso y mejorar mi calidad de sueño.
-7. Como usuario, quiero ver mis datos históricos en gráficos para obtener una visión clara de mi progreso a lo largo del tiempo.
-8. Como usuario, quiero establecer y ajustar mis objetivos de salud y bienestar (como pasos diarios, calorías a quemar y horas de sueño) para mantenerme motivado y enfocado.
+
+1. Como usuario, quiero poder registrarme en la aplicación para acceder a todas sus funcionalidades.
+2. Como usuario, quiero poder iniciar sesión en la aplicación para acceder a mi perfil y datos.
+4. Como usuario, quiero monitorear mi frecuencia cardíaca en tiempo real para estar al tanto de mi salud cardíaca.
+5. Como usuario, quiero recibir alertas cuando mi ritmo cardíaco esté fuera de los rangos normales (muy alto o muy bajo) para poder actuar de inmediato.
+6. Como usuario, quiero registrar mi actividad física diaria para poder seguir mi progreso y establecer metas.
+7. Como usuario, quiero recibir notificaciones para recordarme moverme después de estar sentado por mucho tiempo y para recordarme cuándo ir a dormir, ayudándome a mantener hábitos saludables.
+8. Como usuario, quiero recibir recomendaciones personalizadas basadas en mis patrones de salud y actividad para mejorar mi bienestar general.
+9. Como usuario, quiero monitorear mi sueño para entender mejor mis patrones de descanso y mejorar mi calidad de sueño.
+10. Como usuario, quiero ver mis datos históricos en gráficos para obtener una visión clara de mi progreso a lo largo del tiempo.
+11. Como usuario, quiero establecer y ajustar mis objetivos de salud y bienestar (como calorías a quemar y horas de sueño), así como mi información personal para mantenerme motivado y enfocado.
 
 ## Prototipo propuesto
 
