@@ -27,6 +27,41 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 10. Como usuario, quiero ver mis datos históricos en gráficos para obtener una visión clara de mi progreso a lo largo del tiempo.
 11. Como usuario, quiero establecer y ajustar mis objetivos de salud y bienestar (como calorías a quemar y horas de sueño), así como mi información personal para mantenerme motivado y enfocado.
 
-## Prototipo propuesto
+## Prototipo Propuesto
+### Registro de Usuarios
+<p align="center">
+  <img src="https://github.com/cr7kawai/Reloj-Vital/assets/70409607/049e254b-5fe2-459b-84e4-d77249fc6b63" alt="Registro" width="275" style="display: block; margin: 0 auto;">
+</p>
+
+### Inicio de Sesión
+<p align="center">
+  <img src="https://github.com/cr7kawai/Reloj-Vital/assets/70409607/cd8b2736-44da-43ce-8d68-56f5e1d2925d" alt="Login" width="275" style="display: block; margin: 0 auto;">
+</p>
+
+### Inicio
+<p align="center">
+  <img src="https://github.com/cr7kawai/Reloj-Vital/assets/70409607/80e741e1-b581-4dec-9b0e-7470107432a0" alt="Inicio" style="display: block; margin: 0 auto;">
+</p>
+
+### Ritmo Cardiaco
+<p align="center">
+  <img src="https://github.com/cr7kawai/Reloj-Vital/assets/70409607/133027a9-2ec3-43b3-8c3d-7607fe12c0c0" alt="Ritmo Cardiaco" style="display: block; margin: 0 auto;">
+</p>
+
+### Actividad Física
+<p align="center">
+  <img src="https://github.com/cr7kawai/Reloj-Vital/assets/70409607/b4b73a6e-82a5-49b4-bb6e-e23a2e076774" alt="Actividad Física" style="display: block; margin: 0 auto;">
+</p>
+
+### Sueño
+<p align="center">
+  <img src="https://github.com/cr7kawai/Reloj-Vital/assets/70409607/aa62405f-c205-412f-b96a-fa5205048379" alt="Sueño" style="display: block; margin: 0 auto;">
+</p>
+
+### Cuenta
+<p align="center">
+  <img src="https://github.com/cr7kawai/Reloj-Vital/assets/70409607/76017ae3-c00f-48e2-aabd-3a82d6626993" alt="Cuenta" width="275" style="display: block; margin: 0 auto;">
+</p>
 
 ## Tablero en Trello
+Puedes acceder al tablero de Trello del proyecto [aquí](https://trello.com/invite/b/hpRexQgs/ATTIb7adaa5f4b2b22b23f892c7a59e9495d7F344284/reloj-vital).
