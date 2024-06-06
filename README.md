@@ -1,5 +1,10 @@
 # Reloj-Vital
 
+## Alumnos
+- Hernández Solís Miguel Ángel
+- Marín Reyes Saúl Guadalupe
+- Rojas Sánchez Oscar Adahir
+
 ## Visión
 Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y recomendaciones personalizadas basadas en datos en tiempo real. La aplicación Reloj Vital proporcionará a los usuarios información precisa sobre su frecuencia cardíaca, actividad física y patrones de sueño, junto con alertas y recomendaciones para fomentar hábitos de vida saludables.
 
