@@ -37,30 +37,27 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 9. Como usuario, quiero establecer y ajustar mis objetivos de salud y bienestar (como calorías a quemar), así como mi información personal para mantenerme motivado y enfocado.
 
 ## Prototipo Propuesto
-### Pulsera
-
-### Pantallas
-#### Registro de Usuarios
+### Registro de Usuarios
 <p align="center">
   <img src="https://github.com/user-attachments/assets/653ec965-eb19-416a-b58b-764724cdfa21" alt="Registro" width="275" style="display: block; margin: 0 auto;">
 </p>
 
-#### Inicio de Sesión
+### Inicio de Sesión
 <p align="center">
   <img src="https://github.com/user-attachments/assets/dd3d42ea-1f30-40d4-b2bc-f61ac3d0a87f" alt="Login" width="275" style="display: block; margin: 0 auto;">
 </p>
 
-#### Inicio y Ritmo Cardiaco
+### Inicio y Ritmo Cardiaco
 <p align="center">
   <img src="https://github.com/user-attachments/assets/ba464eef-0282-4baf-a100-6430ba54e0fe" alt="Inicio" width="475" style="display: block; margin: 0 auto;">
 </p>
 
-#### Actividad Física
+### Actividad Física
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2579cc04-3ce8-4c15-b66c-a0fe1a621a46" alt="Actividad Física" width="275" style="display: block; margin: 0 auto;">
 </p>
 
-#### Cuenta
+### Cuenta
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5d83b8f4-96b7-4d2e-96bc-0839667ac8f0" alt="Cuenta" width="275" style="display: block; margin: 0 auto;">
 </p>
