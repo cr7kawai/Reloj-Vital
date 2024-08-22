@@ -19,12 +19,13 @@
         "nl": false,
         "rap": false,
         "inputs": 0,
-        "x": 190,
-        "y": 260,
+        "x": 150,
+        "y": 100,
         "wires": [
             [
                 "function",
-                "d8319903615755c0"
+                "d8319903615755c0",
+                "4001f208dcb54b6c"
             ]
         ]
     },
@@ -41,7 +42,7 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 260,
+        "y": 100,
         "wires": [
             [
                 "e2796a19347f092c"
@@ -61,8 +62,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 360,
-        "y": 180,
+        "x": 420,
+        "y": 20,
         "wires": []
     },
     {
@@ -78,11 +79,12 @@
         "rap": false,
         "inputs": 0,
         "x": 130,
-        "y": 440,
+        "y": 300,
         "wires": [
             [
                 "0772b8f1489ab5f9",
-                "7fd0900786508f66"
+                "7fd0900786508f66",
+                "4629633788fd26f4"
             ]
         ]
     },
@@ -92,8 +94,8 @@
         "z": "c34a4b5033cfb97a",
         "mydb": "mysql_connection",
         "name": "",
-        "x": 680,
-        "y": 260,
+        "x": 720,
+        "y": 100,
         "wires": [
             []
         ]
@@ -111,8 +113,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 360,
-        "y": 360,
+        "x": 340,
+        "y": 240,
         "wires": []
     },
     {
@@ -121,8 +123,8 @@
         "z": "c34a4b5033cfb97a",
         "mydb": "mysql_connection",
         "name": "",
-        "x": 500,
-        "y": 560,
+        "x": 480,
+        "y": 480,
         "wires": [
             [
                 "e21cec1a79d01ac3"
@@ -141,8 +143,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
-        "y": 560,
+        "x": 680,
+        "y": 480,
         "wires": [
             [
                 "9e8bb91aeedd60a3",
@@ -165,7 +167,7 @@
         "expiry": "",
         "broker": "mqtt_broker",
         "x": 910,
-        "y": 620,
+        "y": 540,
         "wires": []
     },
     {
@@ -182,7 +184,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 900,
-        "y": 500,
+        "y": 420,
         "wires": []
     },
     {
@@ -197,8 +199,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 560,
+        "x": 300,
+        "y": 480,
         "wires": [
             [
                 "a5189fde4411ad72"
@@ -209,7 +211,7 @@
         "id": "b4d9cd2c9ac6e09f",
         "type": "mqtt in",
         "z": "c34a4b5033cfb97a",
-        "name": "GET Pasos",
+        "name": "GET Pasos Día",
         "topic": "relojVital/get/mpu6050",
         "qos": "2",
         "datatype": "auto",
@@ -217,8 +219,8 @@
         "nl": false,
         "rap": false,
         "inputs": 0,
-        "x": 130,
-        "y": 560,
+        "x": 120,
+        "y": 480,
         "wires": [
             [
                 "25b36bbe37b3c031"
@@ -237,8 +239,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
-        "y": 440,
+        "x": 370,
+        "y": 300,
         "wires": [
             [
                 "3cb7e264d90a31ce"
@@ -251,8 +253,8 @@
         "z": "c34a4b5033cfb97a",
         "mydb": "mysql_connection",
         "name": "",
-        "x": 540,
-        "y": 440,
+        "x": 560,
+        "y": 300,
         "wires": [
             [
                 "23daa089baac6017"
@@ -271,8 +273,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 740,
-        "y": 440,
+        "x": 760,
+        "y": 300,
         "wires": [
             [
                 "77a99f330c68fbed"
@@ -285,11 +287,87 @@
         "z": "c34a4b5033cfb97a",
         "mydb": "mysql_connection",
         "name": "",
-        "x": 920,
-        "y": 360,
+        "x": 960,
+        "y": 300,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "ae8c546ccef5dcee",
+        "type": "mqtt out",
+        "z": "c34a4b5033cfb97a",
+        "name": "Resultado POST Pulso",
+        "topic": "relojVital/resultado/post/xd58c",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 750,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "4001f208dcb54b6c",
+        "type": "function",
+        "z": "c34a4b5033cfb97a",
+        "name": "Formatear Resultado",
+        "func": "if (msg.payload){\n    msg.payload = msg.payload.valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 160,
+        "wires": [
+            [
+                "ae8c546ccef5dcee"
+            ]
+        ]
+    },
+    {
+        "id": "4629633788fd26f4",
+        "type": "function",
+        "z": "c34a4b5033cfb97a",
+        "name": "Formatear Resultado",
+        "func": "if (msg.payload){\n    msg.payload = msg.payload.valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 360,
+        "wires": [
+            [
+                "0c778b6792cfa5b9"
+            ]
+        ]
+    },
+    {
+        "id": "0c778b6792cfa5b9",
+        "type": "mqtt out",
+        "z": "c34a4b5033cfb97a",
+        "name": "Resultado POST Pasos",
+        "topic": "relojVital/resultado/post/mpu6050",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 690,
+        "y": 360,
+        "wires": []
     },
     {
         "id": "mqtt_broker",
