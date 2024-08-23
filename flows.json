@@ -1,6 +1,6 @@
 [
     {
-        "id": "f21fdad0d3a483fc",
+        "id": "374a865e2a2b4342",
         "type": "tab",
         "label": "IoT",
         "disabled": false,
@@ -8,9 +8,9 @@
         "env": []
     },
     {
-        "id": "e1922c138cac04e2",
+        "id": "ada73c138ecdb3f7",
         "type": "mqtt in",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "POST Pulso",
         "topic": "relojVital/post/xd58c",
         "qos": "2",
@@ -23,16 +23,16 @@
         "y": 100,
         "wires": [
             [
-                "1fddd2a8ef5ebd52",
-                "01a6da5d2d249e24",
-                "4aff91eb60aced91"
+                "69ea5115d7651a9a",
+                "97f81549f7d0f898",
+                "fc18bbef533627fb"
             ]
         ]
     },
     {
-        "id": "1fddd2a8ef5ebd52",
+        "id": "69ea5115d7651a9a",
         "type": "function",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Insertar ritmo cardiaco",
         "func": "if (msg.topic == \"relojVital/post/xd58c\") {\n    msg.topic = \"INSERT INTO datoSensor(valor, fecha, fkSensor) VALUES (\" + msg.payload.valor + \", CURDATE(), 1)\"\n}\n\nreturn msg;",
         "outputs": 1,
@@ -45,14 +45,14 @@
         "y": 100,
         "wires": [
             [
-                "9202583358f620d7"
+                "a1b71814d20d38c7"
             ]
         ]
     },
     {
-        "id": "01a6da5d2d249e24",
+        "id": "97f81549f7d0f898",
         "type": "debug",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "debug 2",
         "active": true,
         "tosidebar": true,
@@ -67,9 +67,9 @@
         "wires": []
     },
     {
-        "id": "2e611d14789c5f6f",
+        "id": "cb30b6509cb0b484",
         "type": "mqtt in",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "POST Pasos",
         "topic": "relojVital/post/mpu6050",
         "qos": "2",
@@ -82,16 +82,16 @@
         "y": 300,
         "wires": [
             [
-                "d786e5491c6df7c2",
-                "5255e3b219f4e195",
-                "29011b7c992da893"
+                "bd848405f0aa47be",
+                "6881f0805e0f1214",
+                "8d96bc2201d2097f"
             ]
         ]
     },
     {
-        "id": "9202583358f620d7",
+        "id": "a1b71814d20d38c7",
         "type": "mysql",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "mydb": "mysql_connection",
         "name": "",
         "x": 720,
@@ -101,9 +101,9 @@
         ]
     },
     {
-        "id": "d786e5491c6df7c2",
+        "id": "bd848405f0aa47be",
         "type": "debug",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "debug 3",
         "active": true,
         "tosidebar": true,
@@ -118,23 +118,23 @@
         "wires": []
     },
     {
-        "id": "e1c1c18cc0a785e2",
+        "id": "a325641a5f91130b",
         "type": "mysql",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "mydb": "mysql_connection",
         "name": "",
-        "x": 480,
-        "y": 480,
+        "x": 500,
+        "y": 620,
         "wires": [
             [
-                "2c081d1cfe6792fe"
+                "5a844f4c9c091134"
             ]
         ]
     },
     {
-        "id": "2c081d1cfe6792fe",
+        "id": "5a844f4c9c091134",
         "type": "function",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Formatear Resultado",
         "func": "if (msg.payload[0]){\n    msg.payload = msg.payload[0].valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
         "outputs": 1,
@@ -143,19 +143,19 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
-        "y": 480,
+        "x": 700,
+        "y": 620,
         "wires": [
             [
-                "5fe2aa92f3776580",
-                "bc695bc140ccb93b"
+                "0884de728a518830",
+                "24abbc83215afac7"
             ]
         ]
     },
     {
-        "id": "bc695bc140ccb93b",
+        "id": "24abbc83215afac7",
         "type": "mqtt out",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Resultado GET Pasos",
         "topic": "relojVital/resultado/get/mpu6050",
         "qos": "2",
@@ -166,14 +166,14 @@
         "correl": "",
         "expiry": "",
         "broker": "mqtt_broker",
-        "x": 920,
-        "y": 540,
+        "x": 940,
+        "y": 660,
         "wires": []
     },
     {
-        "id": "5fe2aa92f3776580",
+        "id": "0884de728a518830",
         "type": "debug",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Resultado SQL",
         "active": true,
         "tosidebar": true,
@@ -183,14 +183,14 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 900,
-        "y": 420,
+        "x": 920,
+        "y": 580,
         "wires": []
     },
     {
-        "id": "99277fe2d998355f",
+        "id": "1e7e3d1b30f08a34",
         "type": "function",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Obtener pasos",
         "func": "msg.topic = \"SELECT valor FROM datoSensor WHERE fecha = CURDATE() and fkSensor = 2;\";\nreturn msg;",
         "outputs": 1,
@@ -199,18 +199,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
-        "y": 480,
+        "x": 320,
+        "y": 620,
         "wires": [
             [
-                "e1c1c18cc0a785e2"
+                "a325641a5f91130b"
             ]
         ]
     },
     {
-        "id": "6d7572d543438408",
+        "id": "b14f86835cacca69",
         "type": "mqtt in",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "GET Pasos Día",
         "topic": "relojVital/get/mpu6050",
         "qos": "2",
@@ -219,18 +219,18 @@
         "nl": false,
         "rap": false,
         "inputs": 0,
-        "x": 120,
-        "y": 480,
+        "x": 140,
+        "y": 620,
         "wires": [
             [
-                "99277fe2d998355f"
+                "1e7e3d1b30f08a34"
             ]
         ]
     },
     {
-        "id": "5255e3b219f4e195",
+        "id": "6881f0805e0f1214",
         "type": "function",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Verificar Existencia",
         "func": "if (msg.topic == \"relojVital/post/mpu6050\") {\n    msg.valor = msg.payload.valor;\n    msg.topic = \"SELECT COUNT(*) AS count FROM datoSensor WHERE fecha = CURDATE() AND fkSensor = 2\";\n}\nreturn msg;",
         "outputs": 1,
@@ -243,28 +243,28 @@
         "y": 300,
         "wires": [
             [
-                "dd49dbf1bdfd7a87"
+                "fc4315f859798443"
             ]
         ]
     },
     {
-        "id": "dd49dbf1bdfd7a87",
+        "id": "fc4315f859798443",
         "type": "mysql",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "mydb": "mysql_connection",
         "name": "",
         "x": 560,
         "y": 300,
         "wires": [
             [
-                "a38356e524a98297"
+                "b37a13223dc44bba"
             ]
         ]
     },
     {
-        "id": "a38356e524a98297",
+        "id": "b37a13223dc44bba",
         "type": "function",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Actualizar o Insertar",
         "func": "if (msg.payload && msg.payload[0]) {\n    var valor = msg.valor; // Usa la variable asignada\n\n    if (msg.payload[0].count > 0) {\n        // Hay un registro, preparar actualización\n        if (valor !== undefined) {\n            msg.topic = \"UPDATE datoSensor SET valor = \" + valor + \" WHERE fecha = CURDATE() AND fkSensor = 2\";\n        } else {\n            node.error(\"Valor no definido para actualización.\");\n            return null;\n        }\n    } else {\n        // No hay registro, preparar inserción\n        if (valor !== undefined) {\n            msg.topic = \"INSERT INTO datoSensor(valor, fecha, fkSensor) VALUES (\" + valor + \", CURDATE(), 2)\";\n        } else {\n            node.error(\"Valor no definido para inserción.\");\n            return null;\n        }\n    }\n} else {\n    node.error(\"Datos del payload no disponibles.\");\n    return null;\n}\nreturn msg;\n",
         "outputs": 1,
@@ -277,14 +277,14 @@
         "y": 300,
         "wires": [
             [
-                "e8cae9247b72c629"
+                "82813fd47b3aaca2"
             ]
         ]
     },
     {
-        "id": "e8cae9247b72c629",
+        "id": "82813fd47b3aaca2",
         "type": "mysql",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "mydb": "mysql_connection",
         "name": "",
         "x": 960,
@@ -294,9 +294,9 @@
         ]
     },
     {
-        "id": "ec16624326e39151",
+        "id": "db20664863bea9cd",
         "type": "mqtt out",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Resultado POST Pulso",
         "topic": "relojVital/resultado/post/xd58c",
         "qos": "2",
@@ -312,9 +312,9 @@
         "wires": []
     },
     {
-        "id": "4aff91eb60aced91",
+        "id": "fc18bbef533627fb",
         "type": "function",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Formatear Resultado",
         "func": "if (msg.payload){\n    msg.payload = msg.payload.valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
         "outputs": 1,
@@ -327,14 +327,14 @@
         "y": 160,
         "wires": [
             [
-                "ec16624326e39151"
+                "db20664863bea9cd"
             ]
         ]
     },
     {
-        "id": "29011b7c992da893",
+        "id": "8d96bc2201d2097f",
         "type": "function",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Formatear Resultado",
         "func": "if (msg.payload){\n    msg.payload = msg.payload.valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
         "outputs": 1,
@@ -347,14 +347,14 @@
         "y": 360,
         "wires": [
             [
-                "970c8e480fb00681"
+                "97bda51eb2e6537f"
             ]
         ]
     },
     {
-        "id": "970c8e480fb00681",
+        "id": "97bda51eb2e6537f",
         "type": "mqtt out",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Resultado POST Pasos",
         "topic": "relojVital/resultado/post/mpu6050",
         "qos": "",
@@ -370,257 +370,19 @@
         "wires": []
     },
     {
-        "id": "22aeec9502a798ff",
+        "id": "40a1dccfbba31ef8",
         "type": "comment",
-        "z": "f21fdad0d3a483fc",
-        "name": "",
+        "z": "374a865e2a2b4342",
+        "name": "Históricos",
         "info": "Traer del último mes, promedio por día\nPromedio por meses\nMaiky hace su mágia",
-        "x": 1120,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "11c015bfe6212da4",
-        "type": "mqtt in",
-        "z": "f21fdad0d3a483fc",
-        "name": "POST Usuario",
-        "topic": "relojVital/post/usuario",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "mqtt_broker",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 210,
-        "y": 1000,
-        "wires": [
-            [
-                "09d9bcb8fed27541",
-                "818c549299da696f",
-                "51c529e3cdf8a77b"
-            ]
-        ]
-    },
-    {
-        "id": "51c529e3cdf8a77b",
-        "type": "debug",
-        "z": "f21fdad0d3a483fc",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload.valor",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 460,
+        "x": 960,
         "y": 920,
         "wires": []
     },
     {
-        "id": "09d9bcb8fed27541",
-        "type": "function",
-        "z": "f21fdad0d3a483fc",
-        "name": "Verificar Existencia",
-        "func": "if (msg.topic == \"relojVital/post/usuario\") {\n    msg.nombre = msg.payload.nombre;\n    msg.sexo = msg.payload.sexo;\n    msg.estatura = msg.payload.estatura;\n    msg.peso = msg.payload.peso;\n    msg.meta = msg.payload.meta;\n    msg.topic = \"SELECT id FROM usuario LIMIT 1\";\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 1000,
-        "wires": [
-            [
-                "313140635c293d11",
-                "17f602c7af8e03cb"
-            ]
-        ]
-    },
-    {
-        "id": "313140635c293d11",
-        "type": "mysql",
-        "z": "f21fdad0d3a483fc",
-        "mydb": "mysql_connection",
-        "name": "",
-        "x": 680,
-        "y": 1000,
-        "wires": [
-            [
-                "f401335a7a0b64c6"
-            ]
-        ]
-    },
-    {
-        "id": "f401335a7a0b64c6",
-        "type": "function",
-        "z": "f21fdad0d3a483fc",
-        "name": "Actualizar o Insertar",
-        "func": "if (msg.payload && msg.payload[0]) {\n    var valor = msg.valor; // Usa la variable asignada\n\n    if (msg.payload[0].count > 0) {\n        // Hay un registro, preparar actualización\n        if (valor !== undefined) {\n            msg.topic = \"UPDATE datoSensor SET valor = \" + valor + \" WHERE fecha = CURDATE() AND fkSensor = 2\";\n        } else {\n            node.error(\"Valor no definido para actualización.\");\n            return null;\n        }\n    } else {\n        // No hay registro, preparar inserción\n        if (valor !== undefined) {\n            msg.topic = \"INSERT INTO datoSensor(valor, fecha, fkSensor) VALUES (\" + valor + \", CURDATE(), 2)\";\n        } else {\n            node.error(\"Valor no definido para inserción.\");\n            return null;\n        }\n    }\n} else {\n    node.error(\"Datos del payload no disponibles.\");\n    return null;\n}\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 1000,
-        "wires": [
-            [
-                "8eacb231a2cadb85"
-            ]
-        ]
-    },
-    {
-        "id": "8eacb231a2cadb85",
-        "type": "mysql",
-        "z": "f21fdad0d3a483fc",
-        "mydb": "mysql_connection",
-        "name": "",
-        "x": 1080,
-        "y": 1000,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "818c549299da696f",
-        "type": "function",
-        "z": "f21fdad0d3a483fc",
-        "name": "Formatear Resultado",
-        "func": "if (msg.payload){\n    msg.payload = msg.payload.valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 500,
-        "y": 1060,
-        "wires": [
-            [
-                "0f8629688013dadf"
-            ]
-        ]
-    },
-    {
-        "id": "0f8629688013dadf",
+        "id": "5cf2af63d95d2ea8",
         "type": "mqtt out",
-        "z": "f21fdad0d3a483fc",
-        "name": "Resultado POST Pasos",
-        "topic": "relojVital/resultado/post/mpu6050",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "mqtt_broker",
-        "x": 810,
-        "y": 1060,
-        "wires": []
-    },
-    {
-        "id": "17f602c7af8e03cb",
-        "type": "debug",
-        "z": "f21fdad0d3a483fc",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload.valor",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 700,
-        "y": 920,
-        "wires": []
-    },
-    {
-        "id": "1cd8fce3df93b806",
-        "type": "mqtt in",
-        "z": "f21fdad0d3a483fc",
-        "name": "GET Usuario",
-        "topic": "relojVital/get/usuario",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "mqtt_broker",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 130,
-        "y": 780,
-        "wires": [
-            [
-                "3a213dee0024719a"
-            ]
-        ]
-    },
-    {
-        "id": "3a213dee0024719a",
-        "type": "function",
-        "z": "f21fdad0d3a483fc",
-        "name": "Preparar Consulta SQL",
-        "func": "if (msg.topic == \"relojVital/get/usuario\") {\n    msg.topic = `SELECT nombre, estatura, peso, meta FROM usuario LIMIT 1`;\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 780,
-        "wires": [
-            [
-                "8a8c7f1f6f96dcb2"
-            ]
-        ]
-    },
-    {
-        "id": "8a8c7f1f6f96dcb2",
-        "type": "mysql",
-        "z": "f21fdad0d3a483fc",
-        "mydb": "mysql_connection",
-        "name": "",
-        "x": 600,
-        "y": 780,
-        "wires": [
-            [
-                "6a251442cca20c31"
-            ]
-        ]
-    },
-    {
-        "id": "6a251442cca20c31",
-        "type": "function",
-        "z": "f21fdad0d3a483fc",
-        "name": "Formatear Resultado",
-        "func": "if (msg.payload && msg.payload.length > 0) {\n    var user = msg.payload[0];\n    msg.payload = {\n        nombre: user.nombre,\n        estatura: user.estatura,\n        peso: user.peso,\n        meta: user.meta,\n        registrado: true\n    };\n} else {\n    msg.payload = { registrado: false };\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 820,
-        "y": 780,
-        "wires": [
-            [
-                "d3220a6bba254951",
-                "1342591dc666b764"
-            ]
-        ]
-    },
-    {
-        "id": "d3220a6bba254951",
-        "type": "mqtt out",
-        "z": "f21fdad0d3a483fc",
+        "z": "374a865e2a2b4342",
         "name": "Resultado GET Usuario",
         "topic": "relojVital/resultado/get/usuario",
         "qos": "2",
@@ -631,15 +393,331 @@
         "correl": "",
         "expiry": "",
         "broker": "mqtt_broker",
-        "x": 1110,
-        "y": 800,
+        "x": 930,
+        "y": 740,
         "wires": []
     },
     {
-        "id": "1342591dc666b764",
+        "id": "556dc01fbe53080c",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Formatear Resultado",
+        "func": "if (msg.payload && msg.payload.length > 0) {\n    var user = msg.payload[0];\n    msg.payload = {\n        nombre: user.nombre,\n        estatura: user.estatura,\n        peso: user.peso,\n        meta: user.meta,\n        registrado: true\n    };\n} else {\n    msg.payload = { registrado: false };\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 740,
+        "wires": [
+            [
+                "5cf2af63d95d2ea8"
+            ]
+        ]
+    },
+    {
+        "id": "ede2b18cdc84f33f",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 520,
+        "y": 740,
+        "wires": [
+            [
+                "556dc01fbe53080c"
+            ]
+        ]
+    },
+    {
+        "id": "ead16642e962cead",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Preparar Consulta SQL",
+        "func": "msg.topic = `SELECT nombre, estatura, peso, meta FROM usuario LIMIT 1`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 740,
+        "wires": [
+            [
+                "ede2b18cdc84f33f"
+            ]
+        ]
+    },
+    {
+        "id": "865b8f573af73223",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "GET Usuario",
+        "topic": "relojVital/get/usuario",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 740,
+        "wires": [
+            [
+                "ead16642e962cead"
+            ]
+        ]
+    },
+    {
+        "id": "a3de057a7121bcf8",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "POST Usuario",
+        "topic": "relojVital/post/usuario",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 820,
+        "wires": [
+            [
+                "4b61c3c72f7123cf"
+            ]
+        ]
+    },
+    {
+        "id": "4b61c3c72f7123cf",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Verificar Existencia",
+        "func": "msg.nombre = msg.payload.nombre;\nmsg.sexo = msg.payload.sexo;\nmsg.estatura = msg.payload.estatura;\nmsg.peso = msg.payload.peso;\nmsg.meta = msg.payload.meta;\nmsg.topic = \"SELECT id FROM usuario LIMIT 1\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 820,
+        "wires": [
+            [
+                "b6d014b54f5948ce"
+            ]
+        ]
+    },
+    {
+        "id": "b6d014b54f5948ce",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 460,
+        "y": 820,
+        "wires": [
+            [
+                "80cd453ca62d5fd0"
+            ]
+        ]
+    },
+    {
+        "id": "80cd453ca62d5fd0",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Actualizar o Insertar",
+        "func": "if (msg.payload.length > 0) {\n    // Actualizar el usuario\n    msg.topic = `UPDATE usuario SET nombre='${msg.nombre}', sexo='${msg.sexo}', estatura=${msg.estatura}, peso=${msg.peso}, meta=${msg.meta} WHERE id=${msg.payload[0].id}`;\n} else {\n    // Insertar nuevo usuario\n    msg.topic = `INSERT INTO usuario (nombre, sexo, estatura, peso, meta) VALUES ('${msg.nombre}', '${msg.sexo}', ${msg.estatura}, ${msg.peso}, ${msg.meta})`;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 820,
+        "wires": [
+            [
+                "dd94291afb2eca3b"
+            ]
+        ]
+    },
+    {
+        "id": "dd94291afb2eca3b",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 820,
+        "y": 820,
+        "wires": [
+            [
+                "ead16642e962cead"
+            ]
+        ]
+    },
+    {
+        "id": "d575d1e0b90eb9f9",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "GET Temperatura",
+        "topic": "relojVital/get/dht11",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "79a6e10f779cd8e1"
+            ]
+        ]
+    },
+    {
+        "id": "79a6e10f779cd8e1",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Formatear Resultado",
+        "func": "if (msg.payload){\n    msg.payload = msg.payload.valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "985d1f907a08b99d"
+            ]
+        ]
+    },
+    {
+        "id": "985d1f907a08b99d",
+        "type": "mqtt out",
+        "z": "374a865e2a2b4342",
+        "name": "Resultado GET Temperatura",
+        "topic": "relojVital/resultado/get/dht11",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 680,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4dc99187517928dd",
+        "type": "comment",
+        "z": "374a865e2a2b4342",
+        "name": "Usuario y pasos del día",
+        "info": "Los pasos de día son de ayuda para el dispositivo y que cuando se apague no vuelva a empezar de 0.\nLo otro es para control y gestión del usuario",
+        "x": 960,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "ef03625b0c6cf3ec",
+        "type": "comment",
+        "z": "374a865e2a2b4342",
+        "name": "Obtener valores al momento",
+        "info": "Se obtienen los valores de los sensores en el momento",
+        "x": 940,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "70d6977d34facb33",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "GET Promedio Diario XD58C",
+        "topic": "relojVital/get/xd58c/promedio",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 1040,
+        "wires": [
+            [
+                "2cbfe21629a8c958"
+            ]
+        ]
+    },
+    {
+        "id": "2cbfe21629a8c958",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Consulta Promedio Diario",
+        "func": "msg.topic = `SELECT fecha, AVG(valor) AS promedio FROM datoSensor WHERE fkSensor = 1 AND MONTH(fecha) = MONTH(CURDATE()) AND YEAR(fecha) = YEAR(CURDATE()) GROUP BY fecha`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1040,
+        "wires": [
+            [
+                "c7ccbf23a921fb8e"
+            ]
+        ]
+    },
+    {
+        "id": "c7ccbf23a921fb8e",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 700,
+        "y": 1040,
+        "wires": [
+            [
+                "1b5694260a579a19",
+                "3ac8addcf6df8db1"
+            ]
+        ]
+    },
+    {
+        "id": "1b5694260a579a19",
+        "type": "mqtt out",
+        "z": "374a865e2a2b4342",
+        "name": "Publicar Promedio Diario",
+        "topic": "relojVital/respuesta/xd58c/promedio",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 940,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "3ac8addcf6df8db1",
         "type": "debug",
-        "z": "f21fdad0d3a483fc",
-        "name": "Resultado Usuario",
+        "z": "374a865e2a2b4342",
+        "name": "Mostrar promedio de pulsos",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -648,28 +726,99 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1090,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "e86c1e1975eb3061",
-        "type": "comment",
-        "z": "f21fdad0d3a483fc",
-        "name": "",
-        "info": "Corregir esta perra mamada",
-        "x": 600,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "872716518d8f1eaf",
-        "type": "comment",
-        "z": "f21fdad0d3a483fc",
-        "name": "",
-        "info": "Corregir esta perra mamada",
         "x": 960,
-        "y": 940,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d087e48fc14c81da",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "GET Datos Diarios MPU650",
+        "topic": "relojVital/get/mpu650/diario",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 1180,
+        "wires": [
+            [
+                "639870ddbcb708e5"
+            ]
+        ]
+    },
+    {
+        "id": "639870ddbcb708e5",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Consulta Datos Diarios",
+        "func": "msg.topic = `SELECT fecha, valor FROM datoSensor WHERE fkSensor = 2 AND MONTH(fecha) = MONTH(CURDATE()) AND YEAR(fecha) = YEAR(CURDATE())`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1180,
+        "wires": [
+            [
+                "c7cebcb7acba4001"
+            ]
+        ]
+    },
+    {
+        "id": "c7cebcb7acba4001",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 660,
+        "y": 1180,
+        "wires": [
+            [
+                "970f3663c1624016",
+                "9a3d6102fca4c6e9"
+            ]
+        ]
+    },
+    {
+        "id": "970f3663c1624016",
+        "type": "mqtt out",
+        "z": "374a865e2a2b4342",
+        "name": "Publicar Datos Diarios",
+        "topic": "relojVital/respuesta/mpu650/diario",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 880,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "9a3d6102fca4c6e9",
+        "type": "debug",
+        "z": "374a865e2a2b4342",
+        "name": "Resultado pasos diarios",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 1120,
         "wires": []
     },
     {
