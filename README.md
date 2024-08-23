@@ -20,21 +20,22 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 ## Hardware Empleado
 - **Smartphone Android**: Dispositivo móvil para instalar, probar y utilizar la aplicación.
 - **ESP32**: Microcontrolador que servirá como el cerebro del dispositivo de monitoreo.
-- **Sensor de Frecuencia Cardiaca (MAX30100/30102)**: Para monitorear la frecuencia cardíaca en tiempo real.
+- **Sensor de Frecuencia Cardiaca (XD-58C)**: Para monitorear la frecuencia cardíaca en tiempo real.
 - **Acelerómetro (MPU6050)**: Para registrar la actividad física.
-- **Batería Recargable**: Para alimentar el dispositivo de monitoreo.
+- **THT11**: Para monitorear temperatura
+- **Motor vibrador en forma de moneda**: Vibra en BPM fuera de rango normal
+- **Led**: Led amarillo para avisar al usuario si eta fuera de rango normal (alto o bajo)
+- **buzzer**: Vibrara cuando se complete la meta de calorias
+
+- 
 
 ## Historias de Usuario
 
 1. Como usuario, quiero poder registrarme en la aplicación para acceder a todas sus funcionalidades.
-2. Como usuario, quiero poder iniciar sesión en la aplicación para acceder a mi perfil y datos.
-3. Como usuario, quiero monitorear mi frecuencia cardíaca en tiempo real para estar al tanto de mi salud cardíaca.
-4. Como usuario, quiero recibir alertas cuando mi ritmo cardíaco esté fuera de los rangos normales (muy alto o muy bajo) para poder actuar de inmediato.
-5. Como usuario, quiero registrar mi actividad física diaria para poder seguir mi progreso y establecer metas.
-6. Como usuario, quiero recibir notificaciones para recordarme moverme después de estar sentado por mucho tiempo, ayudándome a mantener hábitos saludables.
-7. Como usuario, quiero recibir recomendaciones personalizadas basadas en mis patrones de salud y actividad para mejorar mi bienestar general.
-8. Como usuario, quiero ver mis datos históricos en gráficos para obtener una visión clara de mi progreso a lo largo del tiempo.
-9. Como usuario, quiero establecer y ajustar mis objetivos de salud y bienestar (como calorías a quemar), así como mi información personal para mantenerme motivado y enfocado.
+2. Como usuario, quiero monitorear mi frecuencia cardíaca en tiempo real para estar al tanto de mi salud cardíaca.
+3. Como usuario, quiero recibir alertas cuando mi ritmo cardíaco esté fuera de los rangos normales (muy alto o muy bajo) para poder actuar de inmediato.
+4. Como usuario, quiero ver mis datos históricos en gráficos para obtener una visión clara de mi progreso a lo largo del tiempo.
+5. Como usuario, quiero establecer y ajustar mis objetivos de salud y bienestar (como calorías a quemar), así como mi información personal para mantenerme motivado y enfocado.
 
 ## Prototipo Propuesto
 ### Registro de Usuarios
