@@ -40,7 +40,8 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 ## Prototipo Propuesto
 ### Registro de Usuarios
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/653ec965-eb19-416a-b58b-764724cdfa21" alt="Registro" width="275" style="display: block; margin: 0 auto;">
+![WhatsApp Image 2024-08-22 at 6 19 29 PM](https://github.com/user-attachments/assets/f8a3b83d-708a-41c8-a714-dfe25d872899)
+
 </p>
 
 ### Inicio de Sesión
