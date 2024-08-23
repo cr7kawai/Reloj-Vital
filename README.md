@@ -1,5 +1,5 @@
 # Reloj-Vital
-j
+
 ## Alumnos
 - Hernández Solís Miguel Ángel
 - Marín Reyes Saúl Guadalupe
@@ -40,28 +40,23 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 ## Prototipo Propuesto
 ### Registro de Usuarios
 <p align="center">
-![WhatsApp Image 2024-08-22 at 6 19 29 PM](https://github.com/user-attachments/assets/f8a3b83d-708a-41c8-a714-dfe25d872899)
+<img src="https://github.com/user-attachments/assets/b80967d8-bcdf-46a9-b1b0-d40ffafff75c" alt="Login" width="275" style="display: block; margin: 0 auto;">
 
-</p>
-
-### Inicio de Sesión
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/dd3d42ea-1f30-40d4-b2bc-f61ac3d0a87f" alt="Login" width="275" style="display: block; margin: 0 auto;">
 </p>
 
 ### Inicio y Ritmo Cardiaco
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ba464eef-0282-4baf-a100-6430ba54e0fe" alt="Inicio" width="475" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/user-attachments/assets/08af4b09-60d7-44f7-96be-4e9e9df3ecce" alt="Inicio" width="475" style="display: block; margin: 0 auto;">
 </p>
 
 ### Actividad Física
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/2579cc04-3ce8-4c15-b66c-a0fe1a621a46" alt="Actividad Física" width="275" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/user-attachments/assets/bfa95476-fc3a-471a-a672-6c98c53168ec" alt="Actividad Física" width="275" style="display: block; margin: 0 auto;">
 </p>
 
 ### Cuenta
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/5d83b8f4-96b7-4d2e-96bc-0839667ac8f0" alt="Cuenta" width="275" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/user-attachments/assets/44e7b217-f37f-4683-80f7-a6ec751483ac" alt="Cuenta" width="275" style="display: block; margin: 0 auto;">
 </p>
 
 ## Tablero en Trello
