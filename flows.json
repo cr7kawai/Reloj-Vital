@@ -67,28 +67,6 @@
         "wires": []
     },
     {
-        "id": "cb30b6509cb0b484",
-        "type": "mqtt in",
-        "z": "374a865e2a2b4342",
-        "name": "POST Pasos",
-        "topic": "relojVital/post/mpu6050",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "mqtt_broker",
-        "nl": false,
-        "rap": false,
-        "inputs": 0,
-        "x": 130,
-        "y": 300,
-        "wires": [
-            [
-                "bd848405f0aa47be",
-                "6881f0805e0f1214",
-                "8d96bc2201d2097f"
-            ]
-        ]
-    },
-    {
         "id": "a1b71814d20d38c7",
         "type": "mysql",
         "z": "374a865e2a2b4342",
@@ -99,23 +77,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "bd848405f0aa47be",
-        "type": "debug",
-        "z": "374a865e2a2b4342",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload.valor",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 340,
-        "y": 240,
-        "wires": []
     },
     {
         "id": "a325641a5f91130b",
@@ -228,72 +189,6 @@
         ]
     },
     {
-        "id": "6881f0805e0f1214",
-        "type": "function",
-        "z": "374a865e2a2b4342",
-        "name": "Verificar Existencia",
-        "func": "if (msg.topic == \"relojVital/post/mpu6050\") {\n    msg.valor = msg.payload.valor;\n    msg.topic = \"SELECT COUNT(*) AS count FROM datoSensor WHERE fecha = CURDATE() AND fkSensor = 2\";\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 300,
-        "wires": [
-            [
-                "fc4315f859798443"
-            ]
-        ]
-    },
-    {
-        "id": "fc4315f859798443",
-        "type": "mysql",
-        "z": "374a865e2a2b4342",
-        "mydb": "mysql_connection",
-        "name": "",
-        "x": 560,
-        "y": 300,
-        "wires": [
-            [
-                "b37a13223dc44bba"
-            ]
-        ]
-    },
-    {
-        "id": "b37a13223dc44bba",
-        "type": "function",
-        "z": "374a865e2a2b4342",
-        "name": "Actualizar o Insertar",
-        "func": "if (msg.payload && msg.payload[0]) {\n    var valor = msg.valor; // Usa la variable asignada\n\n    if (msg.payload[0].count > 0) {\n        // Hay un registro, preparar actualización\n        if (valor !== undefined) {\n            msg.topic = \"UPDATE datoSensor SET valor = \" + valor + \" WHERE fecha = CURDATE() AND fkSensor = 2\";\n        } else {\n            node.error(\"Valor no definido para actualización.\");\n            return null;\n        }\n    } else {\n        // No hay registro, preparar inserción\n        if (valor !== undefined) {\n            msg.topic = \"INSERT INTO datoSensor(valor, fecha, fkSensor) VALUES (\" + valor + \", CURDATE(), 2)\";\n        } else {\n            node.error(\"Valor no definido para inserción.\");\n            return null;\n        }\n    }\n} else {\n    node.error(\"Datos del payload no disponibles.\");\n    return null;\n}\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 760,
-        "y": 300,
-        "wires": [
-            [
-                "82813fd47b3aaca2"
-            ]
-        ]
-    },
-    {
-        "id": "82813fd47b3aaca2",
-        "type": "mysql",
-        "z": "374a865e2a2b4342",
-        "mydb": "mysql_connection",
-        "name": "",
-        "x": 960,
-        "y": 300,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "db20664863bea9cd",
         "type": "mqtt out",
         "z": "374a865e2a2b4342",
@@ -332,49 +227,11 @@
         ]
     },
     {
-        "id": "8d96bc2201d2097f",
-        "type": "function",
-        "z": "374a865e2a2b4342",
-        "name": "Formatear Resultado",
-        "func": "if (msg.payload){\n    msg.payload = msg.payload.valor;\n}else{\n    msg.payload = 0;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 360,
-        "wires": [
-            [
-                "97bda51eb2e6537f"
-            ]
-        ]
-    },
-    {
-        "id": "97bda51eb2e6537f",
-        "type": "mqtt out",
-        "z": "374a865e2a2b4342",
-        "name": "Resultado POST Pasos",
-        "topic": "relojVital/resultado/post/mpu6050",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "mqtt_broker",
-        "x": 690,
-        "y": 360,
-        "wires": []
-    },
-    {
         "id": "40a1dccfbba31ef8",
         "type": "comment",
         "z": "374a865e2a2b4342",
         "name": "Históricos",
-        "info": "Traer del último mes, promedio por día\nPromedio por meses\nMaiky hace su mágia",
+        "info": "Según yo, ya están los históricos",
         "x": 960,
         "y": 920,
         "wires": []
@@ -574,7 +431,7 @@
         "rap": false,
         "inputs": 0,
         "x": 150,
-        "y": 460,
+        "y": 400,
         "wires": [
             [
                 "79a6e10f779cd8e1"
@@ -594,7 +451,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 460,
+        "y": 400,
         "wires": [
             [
                 "985d1f907a08b99d"
@@ -616,7 +473,7 @@
         "expiry": "",
         "broker": "mqtt_broker",
         "x": 680,
-        "y": 460,
+        "y": 400,
         "wires": []
     },
     {
@@ -640,11 +497,11 @@
         "wires": []
     },
     {
-        "id": "70d6977d34facb33",
+        "id": "eb26c46dbe9ba8d5",
         "type": "mqtt in",
         "z": "374a865e2a2b4342",
         "name": "GET Promedio Diario XD58C",
-        "topic": "relojVital/get/xd58c/promedio",
+        "topic": "relojVital/get/xd58c/diario",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "mqtt_broker",
@@ -656,16 +513,16 @@
         "y": 1040,
         "wires": [
             [
-                "2cbfe21629a8c958"
+                "cdaa134a403e2757"
             ]
         ]
     },
     {
-        "id": "2cbfe21629a8c958",
+        "id": "cdaa134a403e2757",
         "type": "function",
         "z": "374a865e2a2b4342",
         "name": "Consulta Promedio Diario",
-        "func": "msg.topic = `SELECT fecha, AVG(valor) AS promedio FROM datoSensor WHERE fkSensor = 1 AND MONTH(fecha) = MONTH(CURDATE()) AND YEAR(fecha) = YEAR(CURDATE()) GROUP BY fecha`;\nreturn msg;",
+        "func": "msg.topic = `SELECT fecha, ROUND(AVG(valor), 0) AS promedio FROM datoSensor WHERE fkSensor = 1 AND MONTH(fecha) = MONTH(CURDATE()) AND YEAR(fecha) = YEAR(CURDATE()) GROUP BY fecha`;\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -676,12 +533,12 @@
         "y": 1040,
         "wires": [
             [
-                "c7ccbf23a921fb8e"
+                "9df8c8679ba60525"
             ]
         ]
     },
     {
-        "id": "c7ccbf23a921fb8e",
+        "id": "9df8c8679ba60525",
         "type": "mysql",
         "z": "374a865e2a2b4342",
         "mydb": "mysql_connection",
@@ -690,17 +547,17 @@
         "y": 1040,
         "wires": [
             [
-                "1b5694260a579a19",
-                "3ac8addcf6df8db1"
+                "f014f88b02762d49",
+                "df6e0b23af93d04c"
             ]
         ]
     },
     {
-        "id": "1b5694260a579a19",
+        "id": "f014f88b02762d49",
         "type": "mqtt out",
         "z": "374a865e2a2b4342",
-        "name": "Publicar Promedio Diario",
-        "topic": "relojVital/respuesta/xd58c/promedio",
+        "name": "Obtener Promedio cardiaco por día",
+        "topic": "relojVital/respuesta/xd58c/diario",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -709,12 +566,12 @@
         "correl": "",
         "expiry": "",
         "broker": "mqtt_broker",
-        "x": 940,
-        "y": 1040,
+        "x": 960,
+        "y": 1060,
         "wires": []
     },
     {
-        "id": "3ac8addcf6df8db1",
+        "id": "df6e0b23af93d04c",
         "type": "debug",
         "z": "374a865e2a2b4342",
         "name": "Mostrar promedio de pulsos",
@@ -731,11 +588,11 @@
         "wires": []
     },
     {
-        "id": "d087e48fc14c81da",
+        "id": "60089c55355c683f",
         "type": "mqtt in",
         "z": "374a865e2a2b4342",
-        "name": "GET Datos Diarios MPU650",
-        "topic": "relojVital/get/mpu650/diario",
+        "name": "GET Calorías Diarias",
+        "topic": "relojVital/get/mpu6050/diario",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "mqtt_broker",
@@ -743,55 +600,55 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 160,
-        "y": 1180,
+        "x": 180,
+        "y": 1160,
         "wires": [
             [
-                "639870ddbcb708e5"
+                "d5fc5960a80f68ed"
             ]
         ]
     },
     {
-        "id": "639870ddbcb708e5",
+        "id": "d5fc5960a80f68ed",
         "type": "function",
         "z": "374a865e2a2b4342",
         "name": "Consulta Datos Diarios",
-        "func": "msg.topic = `SELECT fecha, valor FROM datoSensor WHERE fkSensor = 2 AND MONTH(fecha) = MONTH(CURDATE()) AND YEAR(fecha) = YEAR(CURDATE())`;\nreturn msg;",
+        "func": "msg.topic = `SELECT d.fecha, ROUND(AVG(u.peso * 0.49 * d.valor / 1000), 0) AS calorias FROM datoSensor d, (SELECT peso FROM usuario LIMIT 1) u WHERE d.fkSensor = 2 AND MONTH(d.fecha) = MONTH(CURDATE()) AND YEAR(d.fecha) = YEAR(CURDATE()) GROUP BY d.fecha ORDER BY d.fecha;`;\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 420,
-        "y": 1180,
+        "x": 460,
+        "y": 1160,
         "wires": [
             [
-                "c7cebcb7acba4001"
+                "d1e91cd039e7d3ca"
             ]
         ]
     },
     {
-        "id": "c7cebcb7acba4001",
+        "id": "d1e91cd039e7d3ca",
         "type": "mysql",
         "z": "374a865e2a2b4342",
         "mydb": "mysql_connection",
         "name": "",
-        "x": 660,
-        "y": 1180,
+        "x": 700,
+        "y": 1160,
         "wires": [
             [
-                "970f3663c1624016",
-                "9a3d6102fca4c6e9"
+                "f6eb6743d3781276",
+                "b88a7408016164c7"
             ]
         ]
     },
     {
-        "id": "970f3663c1624016",
+        "id": "f6eb6743d3781276",
         "type": "mqtt out",
         "z": "374a865e2a2b4342",
-        "name": "Publicar Datos Diarios",
-        "topic": "relojVital/respuesta/mpu650/diario",
+        "name": "Obtener calorías por día",
+        "topic": "relojVital/respuesta/mpu6050/diario",
         "qos": "2",
         "retain": "",
         "respTopic": "",
@@ -800,12 +657,12 @@
         "correl": "",
         "expiry": "",
         "broker": "mqtt_broker",
-        "x": 880,
+        "x": 930,
         "y": 1180,
         "wires": []
     },
     {
-        "id": "9a3d6102fca4c6e9",
+        "id": "b88a7408016164c7",
         "type": "debug",
         "z": "374a865e2a2b4342",
         "name": "Resultado pasos diarios",
@@ -817,9 +674,313 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 890,
+        "x": 930,
         "y": 1120,
         "wires": []
+    },
+    {
+        "id": "fa3bc55dac78e78c",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "GET Promedio Mensual XD58C",
+        "topic": "relojVital/get/xd58c/mensual",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1260,
+        "wires": [
+            [
+                "42e06020251b2f72"
+            ]
+        ]
+    },
+    {
+        "id": "42e06020251b2f72",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Consulta Promedio Mensual",
+        "func": "msg.topic = `SELECT CONCAT(YEAR(fecha), '-', MONTH(fecha)) AS mes, ROUND(AVG(valor), 0) AS promedio FROM datoSensor WHERE fkSensor = 1 GROUP BY YEAR(fecha), MONTH(fecha)`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1260,
+        "wires": [
+            [
+                "ad477d223b5c7839"
+            ]
+        ]
+    },
+    {
+        "id": "ad477d223b5c7839",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 730,
+        "y": 1260,
+        "wires": [
+            [
+                "b3e3d6caa0d992d0"
+            ]
+        ]
+    },
+    {
+        "id": "b3e3d6caa0d992d0",
+        "type": "mqtt out",
+        "z": "374a865e2a2b4342",
+        "name": "Publicar Promedio Mensual",
+        "topic": "relojVital/respuesta/xd58c/mensual",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 970,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "e569f685218bc6f7",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "GET Promedio Mensual MPU6050",
+        "topic": "relojVital/get/mpu6050/mensual",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 1320,
+        "wires": [
+            [
+                "94367654a1df1718"
+            ]
+        ]
+    },
+    {
+        "id": "94367654a1df1718",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Consulta Suma Calorías Mensual",
+        "func": "msg.topic = `SELECT DATE_FORMAT(d.fecha, '%M %Y') AS mes, ROUND(SUM((u.peso *  0.49) * (d.valor/1000)), 0) as calorias FROM datoSensor d, (SELECT estatura, peso FROM usuario LIMIT 1) u WHERE d.fkSensor = 2 GROUP BY YEAR(d.fecha), MONTH(d.fecha);`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 1320,
+        "wires": [
+            [
+                "079072fb10b9551f"
+            ]
+        ]
+    },
+    {
+        "id": "079072fb10b9551f",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 740,
+        "y": 1320,
+        "wires": [
+            [
+                "9bdb7f826aa547c1"
+            ]
+        ]
+    },
+    {
+        "id": "9bdb7f826aa547c1",
+        "type": "mqtt out",
+        "z": "374a865e2a2b4342",
+        "name": "Publicar Promedio Mensual",
+        "topic": "relojVital/respuesta/mpu6050/mensual",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 980,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "03f4b30b7f73c290",
+        "type": "mqtt in",
+        "z": "374a865e2a2b4342",
+        "name": "POST Pasos",
+        "topic": "relojVital/post/mpu6050",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "7021a042fdcdaedf",
+                "19dec579414e1b65"
+            ]
+        ]
+    },
+    {
+        "id": "7021a042fdcdaedf",
+        "type": "debug",
+        "z": "374a865e2a2b4342",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.valor",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "19dec579414e1b65",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Verificar Existencia",
+        "func": "if (msg.topic == \"relojVital/post/mpu6050\") {\n    msg.valor = msg.payload.valor;\n    msg.topic = \"SELECT COUNT(*) AS count FROM datoSensor WHERE fecha = CURDATE() AND fkSensor = 2\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "ba0b4c3e52bde37d"
+            ]
+        ]
+    },
+    {
+        "id": "ba0b4c3e52bde37d",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 520,
+        "y": 300,
+        "wires": [
+            [
+                "d7b692e57595d108"
+            ]
+        ]
+    },
+    {
+        "id": "d7b692e57595d108",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Actualizar o Insertar",
+        "func": "if (msg.payload && msg.payload[0]) {\n    var valor = msg.valor; // Usa la variable asignada\n\n    if (msg.payload[0].count > 0) {\n        // Hay un registro, preparar actualización\n        if (valor !== undefined) {\n            msg.topic = \"UPDATE datoSensor SET valor = \" + valor + \" WHERE fecha = CURDATE() AND fkSensor = 2\";\n        } else {\n            node.error(\"Valor no definido para actualización.\");\n            return null;\n        }\n    } else {\n        // No hay registro, preparar inserción\n        if (valor !== undefined) {\n            msg.topic = \"INSERT INTO datoSensor(valor, fecha, fkSensor) VALUES (\" + valor + \", CURDATE(), 2)\";\n        } else {\n            node.error(\"Valor no definido para inserción.\");\n            return null;\n        }\n    }\n} else {\n    node.error(\"Datos del payload no disponibles.\");\n    return null;\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 300,
+        "wires": [
+            [
+                "9973507fd82fab5e"
+            ]
+        ]
+    },
+    {
+        "id": "9973507fd82fab5e",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 920,
+        "y": 300,
+        "wires": [
+            [
+                "4c56cd9910db4319"
+            ]
+        ]
+    },
+    {
+        "id": "bcf5463b840a3c05",
+        "type": "mqtt out",
+        "z": "374a865e2a2b4342",
+        "name": "Resultado POST Pasos",
+        "topic": "relojVital/resultado/post/mpu6050",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 1610,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "4c56cd9910db4319",
+        "type": "function",
+        "z": "374a865e2a2b4342",
+        "name": "Obtener calorías, distancia, pasos",
+        "func": "msg.topic = \"SELECT d.valor as pasos, ROUND((u.peso * 0.49 * d.valor / 1000), 0) AS calorias, ROUND((d.valor * ((u.estatura * 0.38) / 100000)), 2) AS distancia FROM datoSensor d, (SELECT peso, estatura FROM usuario LIMIT 1) u WHERE d.fkSensor = 2 AND d.fecha = CURDATE(); \"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 300,
+        "wires": [
+            [
+                "ed31f56fe8907098"
+            ]
+        ]
+    },
+    {
+        "id": "ed31f56fe8907098",
+        "type": "mysql",
+        "z": "374a865e2a2b4342",
+        "mydb": "mysql_connection",
+        "name": "",
+        "x": 1400,
+        "y": 300,
+        "wires": [
+            [
+                "bcf5463b840a3c05"
+            ]
+        ]
     },
     {
         "id": "mqtt_broker",
