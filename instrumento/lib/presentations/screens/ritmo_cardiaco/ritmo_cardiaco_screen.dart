@@ -1,36 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Para formatear las fechas
 import 'package:instrumento/config/theme/app_theme.dart';
 import 'package:instrumento/presentations/screens/appbar/appbar_screen.dart';
 import 'package:instrumento/presentations/screens/footer/footer_screen.dart';
+import 'package:instrumento/source/mqtt_service.dart';
 
-class RitmoCardiacoScreen extends StatelessWidget {
+class RitmoCardiacoScreen extends StatefulWidget {
   const RitmoCardiacoScreen({super.key});
 
   static const String name = 'RitmoCardiacoScreen';
 
   @override
-  Widget build(BuildContext context) {
-    // Valor que indica la barra en la que se encuentra el usuario (Bajo, Normal, Alto)
-    const int bpm = 70;
+  _RitmoCardiacoScreenState createState() => _RitmoCardiacoScreenState();
+}
 
+class _RitmoCardiacoScreenState extends State<RitmoCardiacoScreen> {
+  late MqttService _mqttService;
+  double _bpm = 70; // Valor inicial del bpm
+  List<Map<String, dynamic>> _historialLatidos = []; // Historial de latidos
+
+  @override
+  void initState() {
+    super.initState();
+    _mqttService = MqttService('broker.emqx.io');
+
+    // Suscribir a los tópicos necesarios para esta pantalla
+    _mqttService.ensureConnected().then((_) {
+      _mqttService.unsubscribeAllExcept([
+        'relojVital/resultado/post/xd58c', // Tópico para frecuencia cardíaca
+        'relojVital/respuesta/xd58c/diario', // Tópico para el historial de latidos diarios
+      ]);
+
+      _mqttService.obtenerFrecuenciaCardiacaStream().listen((value) {
+        setState(() {
+          _bpm = value;
+        });
+      });
+
+      _mqttService.obtenerPromedioDiarioLatidosStream().listen((data) {
+        setState(() {
+          _historialLatidos = data;
+        });
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _mqttService.unsubscribeAllExcept([]);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Ritmo Cardiaco',
-        userInfo: {
-          'name': 'Saúl Reyes',
-          'sex': 'Masculino',
-          'height': '174 cm',
-          'weight': '80 kg',
-          'goal': '300 KCAL/DÍA',
-        },
       ),
       body: Stack(
         children: [
           Container(
-            color: AppColors.lightPink
-                .withOpacity(0.1), // Fondo rosa para toda la pantalla
+            color: AppColors.lightPink.withOpacity(0.1),
           ),
-          _HeartRateView(bpm: bpm), // Vista principal encima del fondo
+          _HeartRateView(bpm: _bpm, historialLatidos: _historialLatidos),
         ],
       ),
       bottomNavigationBar: const CustomFooter(currentScreen: 'Ritmo'),
@@ -40,9 +72,13 @@ class RitmoCardiacoScreen extends StatelessWidget {
 }
 
 class _HeartRateView extends StatefulWidget {
-  final int bpm;
+  final double bpm;
+  final List<Map<String, dynamic>> historialLatidos;
 
-  const _HeartRateView({required this.bpm});
+  const _HeartRateView({
+    required this.bpm,
+    required this.historialLatidos,
+  });
 
   @override
   __HeartRateViewState createState() => __HeartRateViewState();
@@ -61,7 +97,7 @@ class __HeartRateViewState extends State<_HeartRateView> {
           const SizedBox(height: 10),
           Center(
             child: Text(
-              '${widget.bpm} BPM',
+              '${widget.bpm.toStringAsFixed(1)} BPM',
               style: const TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
@@ -83,7 +119,6 @@ class __HeartRateViewState extends State<_HeartRateView> {
     Color normalColor = AppColors.lightPink.withOpacity(0.3);
     Color highColor = AppColors.lightPink.withOpacity(0.3);
 
-    // Cambia el color según el rango de bpm
     if (widget.bpm < 60) {
       lowColor = AppColors.softPink;
     } else if (widget.bpm >= 60 && widget.bpm <= 100) {
@@ -156,7 +191,6 @@ class __HeartRateViewState extends State<_HeartRateView> {
       children: [
         _buildHistoryFilter('Día', selectedFilter == 'Día'),
         _buildHistoryFilter('Semana', selectedFilter == 'Semana'),
-        _buildHistoryFilter('Mes', selectedFilter == 'Mes'),
       ],
     );
   }
@@ -184,22 +218,32 @@ class __HeartRateViewState extends State<_HeartRateView> {
   }
 
   Widget _buildHistoryChart() {
-    List<Widget> bars;
-
     if (selectedFilter == 'Día') {
-      bars = [
-        _buildHistoryBar('Lun', 50),
-        _buildHistoryBar('Mar', 70),
-        _buildHistoryBar('Miér', 90),
-        _buildHistoryBar('Jue', 110),
-        _buildHistoryBar('Vier', 100),
-      ];
+      return _buildDailyChart();
     } else if (selectedFilter == 'Semana') {
-      bars = _buildWeeklyBars();
-    } else if (selectedFilter == 'Mes') {
-      bars = _buildMonthlyBars();
+      return _buildWeeklyChart();
     } else {
-      bars = [];
+      return Container();
+    }
+  }
+
+  Widget _buildDailyChart() {
+    List<Widget> bars = [];
+    final lastFiveDays = getLastFiveDays();
+    double maxPromedio = widget.historialLatidos.isNotEmpty
+        ? widget.historialLatidos
+            .map((data) => (data['promedio'] as num).toDouble())
+            .reduce((a, b) => a > b ? a : b)
+        : 1.0;
+
+    for (int i = 0; i < lastFiveDays.length; i++) {
+      double promedio = widget.historialLatidos.isNotEmpty &&
+              i < widget.historialLatidos.length
+          ? (widget.historialLatidos[i]['promedio'] as num).toDouble()
+          : 0.0;
+
+      double barHeight = promedio / maxPromedio * 100;
+      bars.add(_buildHistoryBar(lastFiveDays[i], barHeight, promedio));
     }
 
     return Row(
@@ -208,39 +252,32 @@ class __HeartRateViewState extends State<_HeartRateView> {
     );
   }
 
-  List<Widget> _buildWeeklyBars() {
-    DateTime now = DateTime.now();
-    int weeksInMonth = (now.day / 7).ceil();
+  Widget _buildWeeklyChart() {
+    List<Widget> bars = [];
+    final weeksData = getWeeksData();
+    double maxPromedio = weeksData.isNotEmpty
+        ? weeksData
+            .map((data) => data['promedio'] as double)
+            .reduce((a, b) => a > b ? a : b)
+        : 1.0;
 
-    return List<Widget>.generate(weeksInMonth, (index) {
-      return _buildHistoryBar('Sem ${index + 1}', 50.0 + (index * 20));
-    });
+    for (var week in weeksData) {
+      double promedio = week['promedio'];
+      double barHeight = promedio / maxPromedio * 100;
+      bars.add(_buildHistoryBar(week['semana'], barHeight, promedio));
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: bars,
+    );
   }
 
-  List<Widget> _buildMonthlyBars() {
-    List<String> months = [
-      'Ene',
-      'Feb',
-      'Mar',
-      'Abr',
-      'May',
-      'Jun',
-      'Jul',
-      'Ago',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dic'
-    ];
-
-    DateTime now = DateTime.now();
-
-    return List<Widget>.generate(now.month, (index) {
-      return _buildHistoryBar(months[index], 50.0 + (index * 10));
-    });
+  Widget _buildPlaceholderChart() {
+    return Center(child: Text('No hay datos para mostrar.'));
   }
 
-  Widget _buildHistoryBar(String label, double height) {
+  Widget _buildHistoryBar(String label, double height, double promedio) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -253,8 +290,42 @@ class __HeartRateViewState extends State<_HeartRateView> {
           ),
         ),
         const SizedBox(height: 5),
+        Text('${promedio.toStringAsFixed(1)}',
+            style: const TextStyle(color: Colors.black)),
+        const SizedBox(height: 5),
         Text(label, style: const TextStyle(color: Colors.black)),
       ],
     );
+  }
+
+  List<String> getLastFiveDays() {
+    final DateFormat formatter = DateFormat('EEE', 'es_ES');
+    final now = DateTime.now();
+    return List.generate(5,
+        (index) => formatter.format(now.subtract(Duration(days: 4 - index))));
+  }
+
+  List<Map<String, dynamic>> getWeeksData() {
+    Map<int, List<double>> semanas = {};
+    for (var entry in widget.historialLatidos) {
+      DateTime fecha = entry['fecha'];
+      int weekOfMonth = (fecha.day - 1) ~/ 7 + 1;
+
+      if (!semanas.containsKey(weekOfMonth)) {
+        semanas[weekOfMonth] = [];
+      }
+      semanas[weekOfMonth]!.add((entry['promedio'] as num).toDouble());
+    }
+
+    List<Map<String, dynamic>> result = [];
+    semanas.forEach((week, valores) {
+      double promedio = valores.reduce((a, b) => a + b) / valores.length;
+      result.add({
+        'semana': 'Sem $week',
+        'promedio': promedio,
+      });
+    });
+
+    return result;
   }
 }
