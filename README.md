@@ -69,7 +69,7 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 </p>
 
 ## Video Demostrativo
-
+<a href="https://youtu.be/ci0Rs_y61UY?si=K9GzFqeJwfA35a_d">RelojVital</a>
 
 ## Tablero en Trello
 Puedes acceder al tablero de Trello del proyecto [aquí](https://trello.com/invite/b/hpRexQgs/ATTIb7adaa5f4b2b22b23f892c7a59e9495d7F344284/reloj-vital).
