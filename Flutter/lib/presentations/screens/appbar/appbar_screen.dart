@@ -5,9 +5,8 @@ import 'package:instrumento/config/theme/app_theme.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final Map<String, String> userInfo; // Aquí se define userInfo
 
-  CustomAppBar({required this.title, required this.userInfo});
+  CustomAppBar({required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return InfoUsuarioScreen(
-                      userInfo: userInfo); // Pasar userInfo aquí
+                  return InfoUsuarioScreen(); // Pasar userInfo aquí
                 },
               );
             },

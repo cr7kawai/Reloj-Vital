@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instrumento/config/theme/app_theme.dart';
 import 'package:instrumento/presentations/screens/appbar/appbar_screen.dart';
 import 'package:instrumento/presentations/screens/footer/footer_screen.dart';
-import 'package:fl_chart/fl_chart.dart'; // Librería para generar gráficas
+import 'package:fl_chart/fl_chart.dart';
+import 'package:instrumento/source/mqtt_service.dart'; // Librería para generar gráficas
 
 class ActividadFisicaScreen extends StatefulWidget {
   const ActividadFisicaScreen({super.key});
@@ -15,19 +16,36 @@ class ActividadFisicaScreen extends StatefulWidget {
 
 class __ActividadFisicaScreenState extends State<ActividadFisicaScreen> {
   String selectedFilter = 'Día'; // Definimos la variable 'selectedFilter' aquí
+  final MqttService _mqttService = MqttService('broker.emqx.io');
+  int _pasos = 0;
+  int _calorias = 0;
+  double _distancia = 0.0;
+  double _porcentajeCalorias = 0.0;
+  int _metaCalorias = 300; // Valor por defecto de la meta de calorías
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Escuchar los datos de la actividad física
+    _mqttService.obtenerDatosActividadFisicaStream().listen((data) {
+      print('Datos de actividad recibidos: $data');
+      setState(() {
+        _pasos = data['pasos'];
+        _calorias = data['calorias'];
+        _distancia = data['distancia'];
+        _metaCalorias = data['meta']; // Actualizar la meta de calorías
+        _porcentajeCalorias =
+            (_calorias / _metaCalorias) * 100; // Usar la meta obtenida
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Actividad Física',
-        userInfo: {
-          'name': 'Saúl Reyes',
-          'sex': 'Masculino',
-          'height': '174 cm',
-          'weight': '80 kg',
-          'goal': '300 KCAL/DÍA',
-        },
       ),
       body: Container(
         color: AppColors.lightPink
@@ -51,29 +69,27 @@ class __ActividadFisicaScreenState extends State<ActividadFisicaScreen> {
 
   Widget _buildActivityOverview() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Centrar la fila completa
-      crossAxisAlignment:
-          CrossAxisAlignment.center, // Alineación vertical centrada
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildPieChart(), // Gráfico circular
-        const SizedBox(width: 40), // Espacio entre la gráfica y el texto
-        const Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.end, // Alinear el texto a la derecha
+        _buildPieChart(), // Gráfico circular actualizado con el porcentaje de calorías
+        const SizedBox(width: 40),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
+            const Text(
               'Objetivo',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black), // Texto en negro para contraste
+                  color: Colors.black),
             ),
             Text(
-              '120/300 KCAL',
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              '$_calorias/$_metaCalorias KCAL',
+              style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Pasos',
               style: TextStyle(
                   fontSize: 18,
@@ -81,19 +97,19 @@ class __ActividadFisicaScreenState extends State<ActividadFisicaScreen> {
                   color: Colors.black),
             ),
             Text(
-              '1,984',
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              '$_pasos',
+              style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Distancia',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
-            Text('1.34 KM',
-                style: TextStyle(fontSize: 16, color: Colors.black)),
+            Text('$_distancia KM',
+                style: const TextStyle(fontSize: 16, color: Colors.black)),
           ],
         ),
       ],
@@ -109,18 +125,18 @@ class __ActividadFisicaScreenState extends State<ActividadFisicaScreen> {
           sections: [
             PieChartSectionData(
               color: AppColors.softPink,
-              value: 40,
-              title: '40%',
+              value: _porcentajeCalorias,
+              title: '${_porcentajeCalorias.toStringAsFixed(1)}%',
               radius: 50,
               titleStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black), // Texto en negro para contraste
+                  color: Colors.black),
             ),
             PieChartSectionData(
               color: Colors.grey[300],
-              value: 60,
-              title: '60%',
+              value: 100 - _porcentajeCalorias,
+              title: '${(100 - _porcentajeCalorias).toStringAsFixed(1)}%',
               radius: 50,
               titleStyle: const TextStyle(
                   fontSize: 16,
