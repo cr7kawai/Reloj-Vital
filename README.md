@@ -45,27 +45,22 @@ Mejorar la salud y el bienestar de los usuarios mediante un monitoreo integral y
 ## Prototipo Propuesto
 ### Inicio
 <p align="center">
-<img src="" alt="Inicio" width="275" style="display: block; margin: 0 auto;">
-</p>
-
-### Registro de Datos de Usuario
-<p align="center">
-<img src="https://github.com/user-attachments/assets/b80967d8-bcdf-46a9-b1b0-d40ffafff75c" alt="Login" width="275" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/user-attachments/assets/d620e1af-719a-4786-b311-f36a36004b49" alt="Inicio" width="275" style="display: block; margin: 0 auto;">
 </p>
 
 ### Ritmo Cardiaco
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/08af4b09-60d7-44f7-96be-4e9e9df3ecce" alt="Inicio" width="275" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/user-attachments/assets/4d94536a-1bff-4ab8-83a7-9c8a61e1ba2b" alt="Inicio" width="275" style="display: block; margin: 0 auto;">
 </p>
 
 ### Actividad Física
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/bfa95476-fc3a-471a-a672-6c98c53168ec" alt="Actividad Física" width="275" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/user-attachments/assets/f4d384a9-d5cd-4cff-aef4-6420005d3cc2" alt="Actividad Física" width="275" style="display: block; margin: 0 auto;">
 </p>
 
-### Cuenta
+### Datos del usuario
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/44e7b217-f37f-4683-80f7-a6ec751483ac" alt="Cuenta" width="275" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/user-attachments/assets/41a720e4-230e-489b-afdc-e8c5dcbca13b" alt="Cuenta" width="275" style="display: block; margin: 0 auto;">
 </p>
 
 ### Dispositivo elaborado
