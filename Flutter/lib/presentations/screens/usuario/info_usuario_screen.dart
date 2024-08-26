@@ -1,10 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:instrumento/config/theme/app_theme.dart';
+import 'package:instrumento/source/mqtt_service.dart';
 
-class InfoUsuarioScreen extends StatelessWidget {
-  final Map<String, String> userInfo;
+class InfoUsuarioScreen extends StatefulWidget {
+  const InfoUsuarioScreen({super.key});
 
-  const InfoUsuarioScreen({Key? key, required this.userInfo}) : super(key: key);
+  static const String name = 'InfoUsuarioScreen';
+
+  @override
+  _InfoUsuarioScreenState createState() => _InfoUsuarioScreenState();
+}
+
+class _InfoUsuarioScreenState extends State<InfoUsuarioScreen> {
+  late MqttService _mqttService;
+  Map<String, dynamic> _userInfo = {
+    'name': 'No especificado',
+    'sex': 'No especificado',
+    'height': 'No especificado',
+    'weight': 'No especificado',
+    'goal': 'No especificado'
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _mqttService = MqttService('broker.emqx.io');
+    _initDataStream();
+  }
+
+  Future<void> _initDataStream() async {
+    await _mqttService.ensureConnected();
+
+    _mqttService.obtenerInfoUsuarioStream().listen((data) {
+      if (data['registrado'] == true) {
+        setState(() {
+          _userInfo = {
+            'name': data['nombre'] ?? 'No especificado',
+            'sex': data['sexo'] ?? 'Masculino',
+            'height': '${data['estatura'] ?? 'No especificado'} cm',
+            'weight': '${data['peso'] ?? 'No especificado'} kg',
+            'goal': '${data['meta'] ?? 'No especificado'} KCAL/DÍA'
+          };
+        });
+      } else {
+        setState(() {
+          _userInfo = {
+            'name': 'No especificado',
+            'sex': 'No especificado',
+            'height': 'No especificado',
+            'weight': 'No especificado',
+            'goal': 'No especificado'
+          };
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +69,13 @@ class InfoUsuarioScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildUserInfo('Nombre', userInfo['name'] ?? 'No especificado'),
+              _buildUserInfo('Nombre', _userInfo['name']),
               const SizedBox(height: 10),
-              _buildUserInfo('Sexo', userInfo['sex'] ?? 'No especificado'),
+              _buildUserInfo('Sexo', _userInfo['sex']),
               const SizedBox(height: 10),
-              _buildUserInfo(
-                  'Estatura', userInfo['height'] ?? 'No especificado'),
+              _buildUserInfo('Estatura', _userInfo['height']),
               const SizedBox(height: 10),
-              _buildUserInfo('Peso', userInfo['weight'] ?? 'No especificado'),
+              _buildUserInfo('Peso', _userInfo['weight']),
               const SizedBox(height: 20),
               const Text(
                 'Objetivo',
@@ -36,8 +85,7 @@ class InfoUsuarioScreen extends StatelessWidget {
                     color: Colors.black),
               ),
               const SizedBox(height: 10),
-              _buildUserInfo(
-                  'Actividad Física', userInfo['goal'] ?? 'No especificado'),
+              _buildUserInfo('Actividad Física', _userInfo['goal']),
               const SizedBox(height: 20),
             ],
           ),
